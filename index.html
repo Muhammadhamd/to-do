@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>To-do app</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        box-sizing: border-box;
+        margin: 0%;
+    }
+    body{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        background-color: #181818;
+    }
+    .main-container{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 100vh;
+    }
+    
+    .container{
+        
+        width: 700px;
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+        height: 500px;
+        background-color: #2f2f2f;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+    
+    .adddiv{
+        width: 100%;
+    }
+     #to-do-input{
+        width: 100%;
+        border-radius: 8px;
+        padding: 20px;
+        font-size: 16px;
+        border: 1px solid rgb(0, 0, 0.7);
+    }
+    .tododata{
+        width: 100%;
+    }
+    .to-do-list{
+        list-style: none;
+        margin: 20px 0 0 0;
+    }
+    .to-do-list li{
+
+        background-color: #4b4b4b;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        margin: 10px 0 0 0 ;
+        user-select: none;
+    }
+   
+    ::-webkit-scrollbar-track {
+  background: black; 
+}
+   
+
+    .have-done{
+        text-decoration: line-through;
+        color: black  !important;
+        background-color: #18dcff !important;
+    }
+</style>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="adddiv">
+                <input type="text" id="to-do-input" placeholder="write your today's to do.....">
+            </div>
+            <div class="tododata">
+                <ul class="to-do-list" id="todolist">
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        const item = document.getElementById("to-do-input"),
+              to_do_box = document.getElementById("todolist");
+
+              item.addEventListener(
+                "keyup",
+                function (event) {
+                    if(event.key == "Enter"){
+                      if(item.value != ""){
+                        if (item.value.trim().length != 0){
+                console.log(this.value);
+                addtodo(this.value);
+                this.value ="";
+                      }
+                    }
+                }
+            }
+              )
+
+              const  addtodo = (item) =>{
+                const itemlist = document.createElement('li');
+                itemlist.innerHTML =` ${item}
+                <i class="fa fa-close"></i>`;
+
+
+                itemlist.addEventListener(
+                    "click",
+                    function () {
+                         this.classList.toggle("have-done");
+                    }
+                )
+
+                itemlist.querySelector("i").addEventListener(
+                    "click",
+                    function () {
+                        itemlist.remove();
+                    }
+                )
+                to_do_box.appendChild(itemlist);
+
+              }
+             
+             
+    </script>
+</body>
+</html>
